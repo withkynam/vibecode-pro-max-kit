@@ -20,8 +20,6 @@
 
 # vibecode-pro-max-kit
 
-**Stop your AI from coding before it thinks — and forgetting every detailed prompt from you.<br>This harness turns any AI coding agent into a spec-driven engineering team<br>that researches, plans, ships production-grade code, and self-improves its memory to survive context-rotting even 6 months later.**
-
 <br>
 
 <p align="center">
@@ -30,6 +28,8 @@
   <em>"Total Concentration — Spec Breathing, Tenth Form: Constant Flux.<br>A continuous development cycle that grows stronger with each feature shipped.<br>Context compounds. The flow never breaks."</em><br>
   <strong>— Tanjiro Kamado</strong>
 </p>
+
+*This meta harness turns any AI coding agent into a spec-driven engineering team that researches, plans, ships production-grade code, and self-improves its memory to survive context-rotting even 6 months later.*
 
 🔬 Spec-driven development for AI agents<br>
 📋 Auto-generates PRDs, manages backlogs, routes context automatically<br>

@@ -20,8 +20,6 @@
 
 # vibecode-pro-max-kit
 
-**Đừng để AI viết code trước khi nó suy nghĩ — rồi quên sạch mọi prompt chi tiết của bạn.<br>Bộ harness này biến bất kỳ AI coding agent nào thành một đội ngũ kỹ sư spec-driven<br>biết research, lên plan, ship code production-grade, và tự cải thiện bộ nhớ để sống sót qua context-rotting kể cả 6 tháng sau.**
-
 <br>
 
 <p align="center">
@@ -30,6 +28,8 @@
   <em>"Toàn Tập Trung — Hô Hấp Spec, Thập Chi Hình: Dòng Chảy Bất Tận.<br>Một chu trình phát triển liên tục, mạnh hơn với mỗi feature được ship.<br>Context tích lũy. Dòng chảy không bao giờ đứt."</em><br>
   <strong>— Tanjiro Kamado</strong>
 </p>
+
+*Bộ meta harness này biến bất kỳ AI coding agent nào thành một đội ngũ kỹ sư spec-driven biết research, lên plan, ship code production-grade, và tự cải thiện bộ nhớ để sống sót qua context-rotting kể cả 6 tháng sau.*
 
 🔬 Spec-driven development cho AI agents<br>
 📋 Tự động tạo PRDs, quản lý backlogs, route context tự động<br>

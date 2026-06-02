@@ -20,8 +20,6 @@
 
 # vibecode-pro-max-kit
 
-**别让你的 AI 还没想清楚就开始写代码——更别让它把你精心写的每条 prompt 都忘得一干二净。<br>这套 harness 把任何 AI 编程 agent 变成一支 spec 驱动的工程团队，<br>能调研、能规划、能交付生产级代码，还能自我进化记忆，哪怕 6 个月后也扛得住 context 腐烂。**
-
 <br>
 
 <p align="center">
@@ -30,6 +28,8 @@
   <em>"全集中——Spec 呼吸，拾之型：生生流转。<br>一个随每次功能交付而愈加强大的持续开发循环。<br>Context 在复利增长。水流永不中断。"</em><br>
   <strong>— �的门炭治郎</strong>
 </p>
+
+*这套 meta harness 把任何 AI 编程 agent 变成一支 spec 驱动的工程团队，能调研、能规划、能交付生产级代码，还能自我进化记忆，哪怕 6 个月后也扛得住 context 腐烂。*
 
 🔬 面向 AI agent 的 spec 驱动开发<br>
 📋 自动生成 PRD、管理 backlog、自动路由上下文<br>

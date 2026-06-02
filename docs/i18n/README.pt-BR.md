@@ -20,8 +20,6 @@
 
 # vibecode-pro-max-kit
 
-**Pare seu AI de codar antes de pensar — e de esquecer cada prompt detalhado que voce mandou.<br>Esse harness transforma qualquer agente de codigo AI num time de engenharia orientado a specs<br>que pesquisa, planeja, entrega codigo production-grade, e auto-aprimora sua memoria pra sobreviver ao apodrecimento de contexto mesmo 6 meses depois.**
-
 <br>
 
 <p align="center">
@@ -30,6 +28,8 @@
   <em>"Concentracao Total — Respiracao Spec, Decima Forma: Fluxo Constante.<br>Um ciclo de desenvolvimento continuo que fica mais forte a cada feature entregue.<br>O contexto acumula. O flow nunca quebra."</em><br>
   <strong>— Tanjiro Kamado</strong>
 </p>
+
+*Esse meta harness transforma qualquer agente de codigo AI num time de engenharia orientado a specs que pesquisa, planeja, entrega codigo production-grade, e auto-aprimora sua memoria pra sobreviver ao apodrecimento de contexto mesmo 6 meses depois.*
 
 🔬 Desenvolvimento orientado a specs para agentes de IA<br>
 📋 Gera PRDs automaticamente, gerencia backlogs, roteia contexto automaticamente<br>
