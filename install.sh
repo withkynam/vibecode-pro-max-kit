@@ -160,9 +160,9 @@ cleanup
 # ══════════════════════════════════════════════════════
 # Summary
 # ══════════════════════════════════════════════════════
-AGENT_COUNT=$(ls .claude/agents/*.md 2>/dev/null | wc -l | tr -d ' ')
-SKILL_COUNT=$(ls -d .claude/skills/*/ 2>/dev/null | wc -l | tr -d ' ')
-HOOK_COUNT=$(ls .claude/hooks/*.cjs 2>/dev/null | wc -l | tr -d ' ')
+AGENT_COUNT=$(echo "$FILES" | grep -E '^\.(claude|codex)/agents/' | wc -l | tr -d ' ')
+SKILL_COUNT=$(echo "$FILES" | grep -E '/SKILL\.md$' | wc -l | tr -d ' ')
+HOOK_COUNT=$(echo "$FILES" | grep -E '/hooks/[^/]+\.cjs$' | wc -l | tr -d ' ')
 
 echo ""
 echo -e "  ${GREEN}Install complete.${NC} (v$VERSION)"
