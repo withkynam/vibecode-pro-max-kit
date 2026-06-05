@@ -160,9 +160,12 @@ cleanup
 # ══════════════════════════════════════════════════════
 # Summary
 # ══════════════════════════════════════════════════════
-AGENT_COUNT=$(echo "$FILES" | grep -E '^\.(claude|codex)/agents/' | wc -l | tr -d ' ')
-SKILL_COUNT=$(echo "$FILES" | grep -E '/SKILL\.md$' | wc -l | tr -d ' ')
-HOOK_COUNT=$(echo "$FILES" | grep -E '/hooks/[^/]+\.cjs$' | wc -l | tr -d ' ')
+# grep | wc -l: with `set -o pipefail`, a zero-match grep exits 1 and would
+# abort the installer. Tolerate zero matches by appending `|| true` to the
+# grep stage only — `wc -l` still returns 0 when no lines match.
+AGENT_COUNT=$( (echo "$FILES" | grep -E '^\.(claude|codex)/agents/' || true) | wc -l | tr -d ' ')
+SKILL_COUNT=$( (echo "$FILES" | grep -E '/SKILL\.md$'                || true) | wc -l | tr -d ' ')
+HOOK_COUNT=$(  (echo "$FILES" | grep -E '/hooks/[^/]+\.cjs$'         || true) | wc -l | tr -d ' ')
 
 echo ""
 echo -e "  ${GREEN}Install complete.${NC} (v$VERSION)"
