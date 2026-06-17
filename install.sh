@@ -19,8 +19,34 @@ NC='\033[0m'
 cleanup() { rm -rf "$TMPDIR" 2>/dev/null; }
 trap cleanup EXIT
 
+# DRY_RUN prints what would happen without making any filesystem changes
+# outside the temp clone. Existing backups, symlinks, and copied files are
+# all skipped. Useful for CI smoke checks and for previewing the install
+# before running it for real.
+DRY_RUN=false
+for arg in "$@"; do
+  case "$arg" in
+    --dry-run)
+      DRY_RUN=true
+      ;;
+    -h|--help)
+      echo "Usage: install.sh [--dry-run]"
+      echo "  --dry-run   Print the planned install summary without modifying the working tree."
+      exit 0
+      ;;
+    *)
+      echo "  Error: unknown argument: $arg" >&2
+      echo "  Run with --help for usage." >&2
+      exit 64
+      ;;
+  esac
+done
+
 echo ""
 echo "  vibecode-pro-max-kit installer"
+if [ "$DRY_RUN" = true ]; then
+  echo "  (dry-run mode — no filesystem changes will be made outside the temp clone)"
+fi
 echo "  ─────────────────────────────────"
 echo ""
 
@@ -75,24 +101,28 @@ SYMLINKS_JSON=$(echo "$MANIFEST_JSON" | node -e "
 HAS_EXISTING=false
 if [ -d ".claude" ] || [ -d ".codex" ] || [ -d ".agents" ] || [ -f "CLAUDE.md" ] || [ -f "AGENTS.md" ]; then
   HAS_EXISTING=true
-  echo -e "  ${YELLOW}Existing setup detected.${NC} Backing up..."
-  mkdir -p "$BACKUP_DIR"
+  if [ "$DRY_RUN" = true ]; then
+    echo -e "  ${YELLOW}Existing setup detected.${NC} Would back up to $BACKUP_DIR/"
+  else
+    echo -e "  ${YELLOW}Existing setup detected.${NC} Backing up..."
+    mkdir -p "$BACKUP_DIR"
 
-  # Back up directories
-  [ -d ".claude" ] && cp -R .claude "$BACKUP_DIR/.claude" && echo -e "    ${YELLOW}Backed up${NC} .claude/"
-  [ -d ".codex" ] && cp -R .codex "$BACKUP_DIR/.codex" && echo -e "    ${YELLOW}Backed up${NC} .codex/"
-  [ -d ".agents" ] && cp -R .agents "$BACKUP_DIR/.agents" && echo -e "    ${YELLOW}Backed up${NC} .agents/"
+    # Back up directories
+    [ -d ".claude" ] && cp -R .claude "$BACKUP_DIR/.claude" && echo -e "    ${YELLOW}Backed up${NC} .claude/"
+    [ -d ".codex" ] && cp -R .codex "$BACKUP_DIR/.codex" && echo -e "    ${YELLOW}Backed up${NC} .codex/"
+    [ -d ".agents" ] && cp -R .agents "$BACKUP_DIR/.agents" && echo -e "    ${YELLOW}Backed up${NC} .agents/"
 
-  # Back up root protocol files
-  [ -f "CLAUDE.md" ] && cp CLAUDE.md "$BACKUP_DIR/CLAUDE.md" && echo -e "    ${YELLOW}Backed up${NC} CLAUDE.md"
-  [ -f "AGENTS.md" ] && cp AGENTS.md "$BACKUP_DIR/AGENTS.md" && echo -e "    ${YELLOW}Backed up${NC} AGENTS.md"
-  [ -f "GUIDE.md" ] && cp GUIDE.md "$BACKUP_DIR/GUIDE.md" && echo -e "    ${YELLOW}Backed up${NC} GUIDE.md"
+    # Back up root protocol files
+    [ -f "CLAUDE.md" ] && cp CLAUDE.md "$BACKUP_DIR/CLAUDE.md" && echo -e "    ${YELLOW}Backed up${NC} CLAUDE.md"
+    [ -f "AGENTS.md" ] && cp AGENTS.md "$BACKUP_DIR/AGENTS.md" && echo -e "    ${YELLOW}Backed up${NC} AGENTS.md"
+    [ -f "GUIDE.md" ] && cp GUIDE.md "$BACKUP_DIR/GUIDE.md" && echo -e "    ${YELLOW}Backed up${NC} GUIDE.md"
 
-  echo -e "    Backup at: ${CYAN}$BACKUP_DIR/${NC}"
-  echo ""
+    echo -e "    Backup at: ${CYAN}$BACKUP_DIR/${NC}"
+    echo ""
 
-  # Clean slate — remove old agent tooling dirs
-  rm -rf .claude .codex .agents
+    # Clean slate — remove old agent tooling dirs
+    rm -rf .claude .codex .agents
+  fi
 fi
 
 # ══════════════════════════════════════════════════════
@@ -129,6 +159,12 @@ while IFS= read -r file; do
     continue
   fi
 
+  # Dry-run: count files but skip the actual copy.
+  if [ "$DRY_RUN" = true ]; then
+    INSTALLED_COUNT=$((INSTALLED_COUNT + 1))
+    continue
+  fi
+
   # Create parent directory and copy
   mkdir -p "$(dirname "$file")"
   cp "$TMPDIR/$file" "$file"
@@ -139,10 +175,16 @@ done <<< "$FILES"
 # Symlinks
 # ══════════════════════════════════════════════════════
 echo "  Setting up symlinks..."
+if [ "$DRY_RUN" = true ]; then
+  echo "  (dry-run: symlink creation skipped)"
+fi
 while IFS= read -r line; do
   [ -z "$line" ] && continue
   LINK_PATH="${line%%|*}"
   LINK_TARGET="${line##*|}"
+  if [ "$DRY_RUN" = true ]; then
+    continue
+  fi
   mkdir -p "$(dirname "$LINK_PATH")"
   # Remove existing (wrong symlink or real dir)
   [ -e "$LINK_PATH" ] || [ -L "$LINK_PATH" ] && rm -rf "$LINK_PATH"
@@ -152,8 +194,12 @@ done <<< "$SYMLINKS_JSON"
 # ══════════════════════════════════════════════════════
 # Write snapshot + version
 # ══════════════════════════════════════════════════════
-echo "$FILES" | sort > .vc-installed-files
-echo "$VERSION" > .vc-version
+if [ "$DRY_RUN" = true ]; then
+  echo "  (dry-run: skipping .vc-installed-files and .vc-version writes)"
+else
+  echo "$FILES" | sort > .vc-installed-files
+  echo "$VERSION" > .vc-version
+fi
 
 cleanup
 
