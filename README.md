@@ -1723,11 +1723,11 @@ vibecode-pro-max-kit focuses on the spec-driven development framework and self-i
 
 ## ⭐ Star History
 
-<a href="https://star-history.com/#withkynam/vibecode-pro-max-kit&Date">
+<a href="https://star-history.dera.page/#withkynam/vibecode-pro-max-kit&Date">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=withkynam/vibecode-pro-max-kit&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=withkynam/vibecode-pro-max-kit&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=withkynam/vibecode-pro-max-kit&type=Date" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://star-history.dera.page/svg?repos=withkynam/vibecode-pro-max-kit&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://star-history.dera.page/svg?repos=withkynam/vibecode-pro-max-kit&type=Date" />
+   <img alt="Star History Chart" src="https://star-history.dera.page/svg?repos=withkynam/vibecode-pro-max-kit&type=Date" />
  </picture>
 </a>
 

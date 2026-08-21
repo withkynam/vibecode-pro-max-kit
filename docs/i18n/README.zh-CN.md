@@ -1708,11 +1708,11 @@ vibecode-pro-max-kit 专注于规格驱动的开发框架和自我改进的 cont
 
 ## ⭐ Star 历史
 
-<a href="https://star-history.com/#withkynam/vibecode-pro-max-kit&Date">
+<a href="https://star-history.dera.page/#withkynam/vibecode-pro-max-kit&Date">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=withkynam/vibecode-pro-max-kit&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=withkynam/vibecode-pro-max-kit&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=withkynam/vibecode-pro-max-kit&type=Date" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://star-history.dera.page/svg?repos=withkynam/vibecode-pro-max-kit&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://star-history.dera.page/svg?repos=withkynam/vibecode-pro-max-kit&type=Date" />
+   <img alt="Star History Chart" src="https://star-history.dera.page/svg?repos=withkynam/vibecode-pro-max-kit&type=Date" />
  </picture>
 </a>
 
