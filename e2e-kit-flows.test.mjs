@@ -15,7 +15,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
-import { execSync } from 'node:child_process';
+import { execFileSync, execSync } from 'node:child_process';
 
 const KIT_PATH = process.env.VC_KIT_SOURCE
   ?? path.dirname(new URL(import.meta.url).pathname);
@@ -141,6 +141,15 @@ test('Trial A: new install on empty project', async () => {
       fs.existsSync(path.join(projectPath, '.agents/skills')),
       '.agents/skills exists'
     );
+
+    // Installed hook launcher forwards arguments and stdin to Node.
+    const hookOutput = execFileSync('sh', [
+      '.codex/hooks/run-node.sh',
+      '-e',
+      "process.stdout.write(process.argv[1] + require('node:fs').readFileSync(0, 'utf8'))",
+      'hook argument with spaces: ',
+    ], { cwd: projectPath, input: 'hook input', encoding: 'utf8' });
+    assert.equal(hookOutput, 'hook argument with spaces: hook input');
 
     // discover-skills exits 0 (tests git rev-parse + skill discovery)
     execSync(
